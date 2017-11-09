@@ -1,5 +1,46 @@
 @charset "utf-8";
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    height: 100%;
+}
+
+ul{
+    list-style: none;
+}
 
 body{
-    background: url("../img/bg.png") no-repeat;
+    background:#023b3b url("../img/bg.png") no-repeat center center/cover;
+    height: 100%;
+}
+
+#grid{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    perspective: 2000px;
+}
+
+#grid ul{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+}
+
+#grid ul li{
+    position: absolute;
+    top: -80px;
+    left: -60px;
+    width: 120px;
+    height: 160px;
+    background: rgba(0,127,127,0.5);
+    border: 1px solid rgba(127,255,255,0.25);
+    box-shadow: 0 0 12px rgba(0,255,255,0.5);
+    cursor: pointer;
 }
