@@ -50,6 +50,8 @@
             lastx = ev.clientX;
             lasty = ev.clientY;
         }))
+    }).mouseup(function(){
+        $(document).off('mousemove');
     })
 
 })()
