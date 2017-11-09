@@ -29,10 +29,11 @@
 
 (function () {
 
+    var movex = 0,movey = 0,tz = 0;
+
     $(document).mousedown(function (ev) {
         ev = ev || window.event;
         var lastx = ev.clientX,
-            movex = 0,movey = 0,
             lasty = ev.clientY;
 
         $(document).on('mousemove', (function (ev) {
@@ -44,7 +45,7 @@
             movey -= currenty * .2;
 
             $("#grid ul").css({
-                'transform': 'rotateX('+movey+'deg) rotateY('+movex+'deg)'
+                'transform': 'translateZ('+tz+'px) rotateX('+movey+'deg) rotateY('+movex+'deg)'
             })
 
             lastx = ev.clientX;
@@ -52,6 +53,17 @@
         }))
     }).mouseup(function(){
         $(document).off('mousemove');
-    })
+    }).mousewheel(function(ev,d){
+        ev = ev || window.event;
+
+        tz += d * 60; 
+        tz = Math.min(0,tz);
+        tz = Math.max(-8000,tz);
+        console.log(tz,movey,movex);
+
+        $("#grid ul").css({
+            'transform': 'translateZ('+tz+'px) rotateX('+movey+'deg) rotateY('+movex+'deg)'
+        })
+    })  
 
 })()
