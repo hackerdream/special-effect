@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>无缝轮播</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei, serif;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #swiper {
+            position: relative;
+            width: 660px;
+            height: 400px;
+            margin: 40px auto;
+        }
+
+        #swiper-box {
+            position: relative;
+            width: 660px;
+            height: 400px;
+            overflow: hidden;
+            perspective: 0;
+        }
+
+        #swiper-box ul {
+            width: 660px;
+            height: 100%;
+            transition: 1.5s;
+            transform-style: preserve-3d;
+        }
+
+        #swiper-box ul li {
+            position: absolute;
+            left: calc(50% - 330px);
+            width: 660px;
+            height: 400px;
+            text-align: center;
+            line-height: 400px;
+            font-size: 100px;
+        }
+
+        #num {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 142px;
+            height: 30px;
+            background: rgba(0, 0, 0, .4);
+            border-radius: 15px;
+        }
+
+        #num span {
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin-top: 4px;
+            border-radius: 50%;
+            text-align: center;
+            margin-left: 7px;
+            line-height: 20px;
+            background: #fff;
+            color: #f06;
+        }
+
+        #num span:hover {
+            cursor: pointer;
+        }
+
+        #num .on {
+            background-color: #F60;
+            color: #FFF
+        }
+    </style>
+</head>
+
+<body>
+    <div id="swiper">
+        <div id="swiper-box">
+            <ul>
+                <li style="background:blue;transform:rotateY(0) translateZ(454px);">一</li>
+                <li style="background:pink;transform:rotateY(72deg) translateZ(454px);">二</li>
+                <li style="background:green;transform:rotateY(144deg) translateZ(454px);">三</li>
+                <li style="background:rgb(170, 170, 122);transform:rotateY(216deg)translateZ(454px);">四</li>
+                <li style="background:#ddd;transform:rotateY(288deg)translateZ(454px);">五</li>
+                <li style="background:blue;">一</li>
+            </ul>
+        </div>
+        <div id="num">
+            <span class="on">1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        var box = document.getElementById('swiper-box'),
+            swiperBox = box.getElementsByTagName('ul')[0],
+            numbox = document.getElementById('num'),
+            num = numbox.getElementsByTagName('span'),
+            len = num.length,
+            lastNum = 1,
+            angel,
+            getBack;
+
+        numbox.addEventListener('click', function (ev) {
+            if (ev && ev.target.id != 'num') {
+                clearInterval(time);
+                num[lastNum - 1].className = '';
+                lastNum = ev.target.innerHTML * 1;
+                num[lastNum - 1].className = 'on';
+                angel = (lastNum - 1) * 72;
+                swiperBox.style.transform = `rotateY(${-angel}deg)`;
+            }
+        }, false);
+
+        swiper();
+
+        function swiper() {
+            time = setInterval(function () {
+                num[(lastNum - 1) % len].className = '';
+                lastNum++;
+                num[(lastNum - 1) % len].className = 'on';
+                angel = (lastNum - 1) * 72;
+                (swiperBox.style.transition !== '1.5s')&&(swiperBox.style.transition = '1.5s');
+                if (lastNum === 6) {
+                    swiperBox.style.transform = `rotateY(${-angel}deg)`;
+                    getBack = setTimeout(function () {
+                        lastNum = 1;
+                        swiperBox.style.transition = '0s';
+                        swiperBox.style.transform = 'rotateY(0deg)';
+                    }, 1500)
+                } else {
+                    swiperBox.style.transform = `rotateY(${-angel}deg)`;
+                    if (getBack) {
+                        clearTimeout(getBack);
+                    }
+                }
+            }, 2000)
+        }
+        box.onmouseover = function () {
+            clearInterval(time);
+        }
+        box.onmouseout = swiper;
+        document.addEventListener('visibilitychange', function (ev) {
+            if(ev.target.hidden || ev.targetwebkitHidden){
+                clearInterval(time);
+            }else{
+                swiper();
+            }
+        })
+    </script>
+</body>
+
+</html>
