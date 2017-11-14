@@ -46,12 +46,31 @@ body{
     box-shadow: 0 0 12px rgba(0,255,255,0.5);
     cursor: pointer;
     transition: all 3s cubic-bezier(.57,.54,.56,.52);
+    text-align: center;
     
 }
-#grid ul li：hover{
 
+#grid li .title{
+	font-size:60px;
+	color:rgba(255,255,255,0.7);
+	margin-top:10px;
+	font-weight:bold;
+	text-shadow:0 0 20px rgba(0,255,255,0.5);
+}
+#grid li .author,#grid li .time{
+	font-size:60px;
+	margin-top:10px;
+	font-weight:bold;
+	text-shadow:0 0 20px rgba(0,255,255,0.5);
+	color:rgba(127,255,255,0.75);
+	font-size:14px;
+	text-shadow:0 0 5px rgba(0,255,255,0.5);
 }
 
+#grid li:hover{
+	box-shadow:0 0 12px rgba(0,255,255,0.75);
+	border:1px solid rgba(127,255,255,0.75);
+}
 #btn{
     position: fixed;
     left: 15px;
