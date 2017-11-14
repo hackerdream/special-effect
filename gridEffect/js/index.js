@@ -9,8 +9,8 @@
         zlen = 800;
 
     for (var i = 0; i < num; i++) { //随机布局
-        var number = parseInt(Math.random()*3);
-        var $li = $('<li><p class="title">'+content[number]["title"]+'</p><p class="author">'+content[number]["author"]+'</p><p class="time">'+content[number]["date"]+'</p></li>'),
+        var number = parseInt(Math.random() * 3);
+        var $li = $('<li><p class="title">' + content[number]["title"] + '</p><p class="author">' + content[number]["author"] + '</p><p class="time">' + content[number]["date"] + '</p></li>'),
             x = (Math.random() - 0.5) * 5000, //使得范围在(-2500,2500)
             y = (Math.random() - 0.5) * 5000,
             z = (Math.random() - 0.5) * 5000;
@@ -78,77 +78,126 @@
     }
 
     function Sphere() {
-        var arr = [1,4,8,10,12,17,22,16,14,9,6,5,1];
-		var roX = 180/arr.length;
-		var fisrtRoX = 90;
-		$('#grid ul li').each(function(j){
-			var sum = 0;
-			var index , num;
-			for ( var i=0;i<arr.length;i++ )
-			{
-				sum += arr[i];
-				if ( sum >= j+1 )
-				{
-					index = i;
-					num = arr[i] - (sum-j);
-					break;
-				}
-			}
-			var roY = 360/arr[index];
-			var x = index%2?fisrtRoX+index*roX:fisrtRoX-index*roX;
-			var y = num*roY;
-			var z = 0;
-			if ( x > 90 && x < 270 )
-			{
-				z = 180;
-			}
-			$(this).css({
-				transform : 'rotateY('+y+'deg) rotateX('+x+'deg) rotateZ('+z+'deg) translateZ(800px)'
-			});
-		});
+        var arr = [1, 4, 8, 10, 12, 17, 22, 16, 14, 9, 6, 5, 1];
+        var roX = 180 / arr.length;
+        var fisrtRoX = 90;
+        $('#grid ul li').each(function (j) {
+            var sum = 0;
+            var index, num;
+            for (var i = 0; i < arr.length; i++) {
+                sum += arr[i];
+                if (sum >= j + 1) {
+                    index = i;
+                    num = arr[i] - (sum - j);
+                    break;
+                }
+            }
+            var roY = 360 / arr[index];
+            var x = index % 2 ? fisrtRoX + index * roX : fisrtRoX - index * roX;
+            var y = num * roY;
+            var z = 0;
+            if (x > 90 && x < 270) {
+                z = 180;
+            }
+            $(this).css({
+                transform: 'rotateY(' + y + 'deg) rotateX(' + x + 'deg) rotateZ(' + z + 'deg) translateZ(800px)'
+            });
+        });
     }
 
     function Table() {
-        var tX = 160 , tY = 200;
-		var firstX = -9*tX + 60;
-		var firstY = -4*tY;
-		var arr = [
-			{x:firstX,y:firstY},
-			{x:firstX+17*tX,y:firstY},
-			{x:firstX , y:firstY+tY },
-			{x:firstX+tX , y:firstY+tY},
-			{x:firstX+12*tX , y:firstY+tY },
-			{x:firstX+13*tX , y:firstY+tY },
-			{x:firstX+14*tX , y:firstY+tY },
-			{x:firstX+15*tX , y:firstY+tY },
-			{x:firstX+16*tX , y:firstY+tY },
-			{x:firstX+17*tX , y:firstY+tY },
-			{x:firstX , y:firstY+tY*2 },
-			{x:firstX+tX , y:firstY+tY*2},
-			{x:firstX+12*tX , y:firstY+tY*2 },
-			{x:firstX+13*tX , y:firstY+tY*2 },
-			{x:firstX+14*tX , y:firstY+tY*2 },
-			{x:firstX+15*tX , y:firstY+tY*2 },
-			{x:firstX+16*tX , y:firstY+tY*2 },
-			{x:firstX+17*tX , y:firstY+tY*2 }
-		];
-		$('#grid ul li').each(function(i){
-			var x , y;
-			if ( i < 18 )
-			{
-				x = arr[i].x;
-				y = arr[i].y;
-			}else
-			{
-				var iX = (i+18) % 18;
-				var iY = parseInt((i+18)/18) + 1;
-				x = firstX+iX*tX;
-				y = firstY+iY*tY;
-			}
-			$(this).css({
-				transform : 'translate('+x+'px,'+y+'px)'
-			});
-		});
+        var tX = 160,
+            tY = 200;
+        var firstX = -9 * tX + 60;
+        var firstY = -4 * tY;
+        var arr = [{
+                x: firstX,
+                y: firstY
+            },
+            {
+                x: firstX + 17 * tX,
+                y: firstY
+            },
+            {
+                x: firstX,
+                y: firstY + tY
+            },
+            {
+                x: firstX + tX,
+                y: firstY + tY
+            },
+            {
+                x: firstX + 12 * tX,
+                y: firstY + tY
+            },
+            {
+                x: firstX + 13 * tX,
+                y: firstY + tY
+            },
+            {
+                x: firstX + 14 * tX,
+                y: firstY + tY
+            },
+            {
+                x: firstX + 15 * tX,
+                y: firstY + tY
+            },
+            {
+                x: firstX + 16 * tX,
+                y: firstY + tY
+            },
+            {
+                x: firstX + 17 * tX,
+                y: firstY + tY
+            },
+            {
+                x: firstX,
+                y: firstY + tY * 2
+            },
+            {
+                x: firstX + tX,
+                y: firstY + tY * 2
+            },
+            {
+                x: firstX + 12 * tX,
+                y: firstY + tY * 2
+            },
+            {
+                x: firstX + 13 * tX,
+                y: firstY + tY * 2
+            },
+            {
+                x: firstX + 14 * tX,
+                y: firstY + tY * 2
+            },
+            {
+                x: firstX + 15 * tX,
+                y: firstY + tY * 2
+            },
+            {
+                x: firstX + 16 * tX,
+                y: firstY + tY * 2
+            },
+            {
+                x: firstX + 17 * tX,
+                y: firstY + tY * 2
+            }
+        ];
+        $('#grid ul li').each(function (i) {
+            var x, y;
+            if (i < 18) {
+                x = arr[i].x;
+                y = arr[i].y;
+            } else {
+                var iX = (i + 18) % 18;
+                var iY = parseInt((i + 18) / 18) + 1;
+                x = firstX + iX * tX;
+                y = firstY + iY * tY;
+            }
+            $(this).css({
+                transform: 'translate(' + x + 'px,' + y + 'px)'
+            });
+        });
     }
 
 
@@ -228,5 +277,38 @@
 
         }, 13)
     })
+
+    var $show = $("#show");
+
+
+    $("#grid ul li").click(function (e) {
+        var $lTitle = $(this).find(".title"),
+            $lAuthor = $(this).find('.author');
+            
+        e = e || window.event;
+        $show.fadeIn(1000).css({
+            'transform': 'rotateY(0deg) scale(1) translate(-50%,-50%)'
+        });
+
+        $show.find(".s-title").empty();
+        $show.find(".s-author").empty();
+        console.log($lTitle.html());
+        $show.find(".s-title").html($lTitle.html());
+        $show.find(".s-author").html($lAuthor.html());
+
+        e.stopPropagation();
+
+    })
+
+    $(document).click(function () {
+        $show.fadeOut(1000, function () {
+            $(this).css({
+                'transform': 'translate(-50%,-50%) rotateY(0deg) scale(1.5)'
+            });
+        }).css({
+            'transform': 'translate(-50%,-50%) rotateY(180deg) scale(0.1) '
+        });
+
+    });
 
 })()
