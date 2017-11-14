@@ -284,7 +284,7 @@
     $("#grid ul li").click(function (e) {
         var $lTitle = $(this).find(".title"),
             $lAuthor = $(this).find('.author');
-            
+
         e = e || window.event;
         $show.fadeIn(1000).css({
             'transform': 'rotateY(0deg) scale(1) translate(-50%,-50%)'
@@ -292,7 +292,7 @@
 
         $show.find(".s-title").empty();
         $show.find(".s-author").empty();
-        console.log($lTitle.html());
+
         $show.find(".s-title").html($lTitle.html());
         $show.find(".s-author").html($lAuthor.html());
 
@@ -309,6 +309,31 @@
             'transform': 'translate(-50%,-50%) rotateY(180deg) scale(0.1) '
         });
 
+    });
+
+    $show.click(function(ev){
+        console.log("111");
+        $('#wrap').animate({
+            'marginLeft' : '-100%'
+        },1000,function(){
+            $show.css({
+                'transform' : 'rotateY(0deg) scale(1.5)',
+                display : 'none'
+            });
+        });
+        $('#frame').show().animate({
+            left : 0
+        },1000).find('iframe').attr('src' , '3D drag/index.html');
+        ev.stopPropagation();
+    });
+    $('#back').click(function(ev){
+        $('#wrap').animate({
+            'marginLeft' : 0
+        },1000);
+        $('#frame').show().animate({
+            left :'100%'
+        },1000);
+        ev.stopPropagation();
     });
 
 })()
